@@ -1,23 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float slowness = 10f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
     public void EndGame()
     {
-        Debug.Log("EndGame!");
+        StartCoroutine(RestartLevel());
+    }
+
+    IEnumerator RestartLevel()
+    {
+        Time.timeScale = 1f / slowness;
+        Time.fixedDeltaTime = Time.fixedDeltaTime / slowness;
+
+        
+        yield return new WaitForSeconds(2 / slowness    );
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.fixedDeltaTime * slowness;
+
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 }

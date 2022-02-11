@@ -17,10 +17,7 @@ public class blockSpawner : MonoBehaviour
             spawnTime = Time.time + waveTime;
         }
 
-        if (Block.transform.position.y < -6)
-        {
-            Destroy(Block.gameObject);
-        }
+        
 
     }
 
